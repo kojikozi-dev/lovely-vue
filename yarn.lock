@@ -5121,6 +5121,11 @@ matcher@^1.0.0:
   dependencies:
     escape-string-regexp "^1.0.4"
 
+material-icons@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-0.3.1.tgz#425e06e2448632d6249d6e1ffe2993682c5b171e"
+  integrity sha512-5Hbj76A6xDPcDZEbM4oxTknhWuMwGWnAHVLLPCEq9eVlcHb0fn4koU9ZeyMy1wjARtDEPAHfd5ZdL2Re5hf0zQ==
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -8184,10 +8189,18 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^2.6.10:
+vue@^2.6.10, vue@^2.6.9:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+
+vuesax@^3.8.75:
+  version "3.8.75"
+  resolved "https://registry.yarnpkg.com/vuesax/-/vuesax-3.8.75.tgz#3d0decdd723537984d2b395c70106213f70871d1"
+  integrity sha512-kCYy9FXlRMCRAhtO1BXT0hcPTsi1Lrur8MJnPh5CcNwgsCstJjLkU4WfZhuIeN+lY234sIhkxmEXzqIk+LoIIg==
+  dependencies:
+    chalk "^2.4.2"
+    vue "^2.6.9"
 
 watchpack@^1.5.0:
   version "1.6.0"

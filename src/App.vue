@@ -1,24 +1,33 @@
 <template>
   <div id="app">
-    <h1>Lovely Vue</h1>
-    <input v-model="message" />
-    <button :disabled="isDisabled" @click="add">追加</button>
+    <vs-navbar class="nabarx">
+      <h1>
+        <vs-navbar-title>Lovely Vue</vs-navbar-title>
+      </h1>
+    </vs-navbar>
+    <vs-row vs-justify="center">
+      <vs-input v-model="title" label="title" placeholder="Placeholder" />
+      <vs-input v-model="text" label="text" placeholder="Placeholder" />
+      <vs-button type="relief" :disabled="isDisabled" @click="add"
+        >追加</vs-button
+      >
+    </vs-row>
     <br />
     <template v-if="todos.length === 0">
       タスクはありません
     </template>
     <template v-else>
-      <ul>
+      <vs-row class="wrap" vs-type="flex" vs-justify="flex-start">
         <TaskCard
           v-for="todo in todos"
           :id="todo.id"
           :key="todo.id"
+          :title="todo.title"
           :text="todo.text"
           @remove-task="remove"
         />
-      </ul>
+      </vs-row>
     </template>
-    {{ message }}
   </div>
 </template>
 
@@ -31,22 +40,25 @@ export default {
     TaskCard
   },
   data: () => ({
-    todos: [{ id: 1, text: "ときめき" }],
-    message: "Spark joy!"
+    todos: [{ id: 1, title: "Task Title", text: "Task Text" }],
+    title: "Title",
+    text: "Text"
   }),
   computed: {
     isDisabled() {
-      return this.message.length === 0;
+      return this.text.length === 0;
     }
   },
   methods: {
     add() {
       const newTodo = {
         id: this.todos.length + 1,
-        text: this.message
+        title: this.title,
+        text: this.text
       };
       this.todos.push(newTodo);
-      this.message = "";
+      this.title = "";
+      this.text = "";
     },
     remove(id) {
       this.todos = this.todos.filter(todo => todo.id !== id);

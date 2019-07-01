@@ -5,6 +5,21 @@
 yarn install
 ```
 
+## vuesax setup
+```
+yarn add vuesax
+```
+
+## material-icons setup
+```
+yarn add material-icons
+```
+
+## loglevel setup
+```
+yarn add loglevel
+```
+
 ### Compiles and hot-reloads for development
 ```
 yarn run serve

@@ -1,17 +1,50 @@
 <template>
-  <li class="task-card">
-    <span>{{ text }}</span>
-    <button @click="remove">削除</button>
-  </li>
+  <vs-col
+    class="colx"
+    type="flex"
+    vs-justify="space-around"
+    vs-align="center"
+    vs-lg="4"
+    vs-sm="5"
+    vs-xs="12"
+  >
+    <vs-row vs-justify="center">
+      <vs-col type="flex" vs-justify="center" vs-align="center" vs-w="8">
+        <vs-card>
+          <div slot="header">
+            <h3>
+              {{ title }}
+            </h3>
+          </div>
+          <div>
+            {{ text }}
+          </div>
+          <div slot="footer">
+            <vs-row vs-justify="flex-end">
+              <vs-button color="danger" type="relief" @click="remove"
+                >remove</vs-button
+              >
+            </vs-row>
+          </div>
+        </vs-card>
+      </vs-col>
+    </vs-row>
+  </vs-col>
 </template>
 
 <script>
+import log from "loglevel";
+
 export default {
   name: "TaskCard",
   props: {
     id: {
       type: Number,
       required: true
+    },
+    title: {
+      type: String,
+      default: ""
     },
     text: {
       type: String,
@@ -20,21 +53,11 @@ export default {
   },
   methods: {
     remove() {
-      console.log(`remove: ${this.id}`);
+      log.debug(`remove: ${this.id}`);
       this.$emit("remove-task", this.id);
     }
   }
 };
 </script>
 
-<style>
-.task-card {
-  border: solid 1px;
-  margin: 5px;
-  padding: 2px;
-  width: 250px;
-}
-.task-card > button {
-  float: right;
-}
-</style>
+<style></style>
