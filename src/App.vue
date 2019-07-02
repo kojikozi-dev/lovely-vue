@@ -33,6 +33,7 @@
 
 <script>
 import TaskCard from "@/components/TaskCard.vue";
+import log from "loglevel";
 
 export default {
   name: "App",
@@ -40,19 +41,45 @@ export default {
     TaskCard
   },
   data: () => ({
-    todos: [{ id: 1, title: "Task Title", text: "Task Text" }],
+    todos: [],
     title: "Title",
-    text: "Text"
+    text: "Text",
+    keyLength: 0
   }),
   computed: {
     isDisabled() {
       return this.text.length === 0;
     }
   },
+  watch: {
+    todos: {
+      handler: function(todos) {
+        localStorage.setItem("todos", JSON.stringify(todos));
+        localStorage.keylength = todos.length;
+      },
+      deep: true
+    }
+  },
+  mounted() {
+    if (localStorage.getItem("todos")) {
+      try {
+        this.todos = JSON.parse(localStorage.getItem("todos"));
+        this.todos.forEach(function(todo, index) {
+          todo.id = index + 1;
+        });
+        this.keyLength = Number(localStorage.keylength);
+        log.debug(this.keyLength);
+      } catch (e) {
+        localStorage.removeItem("todos");
+      }
+    }
+  },
   methods: {
     add() {
+      log.debug(this.keyLength);
+      this.keyLength++;
       const newTodo = {
-        id: this.todos.length + 1,
+        id: this.keyLength,
         title: this.title,
         text: this.text
       };
