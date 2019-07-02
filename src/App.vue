@@ -5,13 +5,7 @@
         <vs-navbar-title>Lovely Vue</vs-navbar-title>
       </h1>
     </vs-navbar>
-    <vs-row vs-justify="center">
-      <vs-input v-model="title" label="title" placeholder="Placeholder" />
-      <vs-input v-model="text" label="text" placeholder="Placeholder" />
-      <vs-button type="relief" :disabled="isDisabled" @click="add"
-        >追加</vs-button
-      >
-    </vs-row>
+    <InputForm @add-task="add" />
     <br />
     <template v-if="todos.length === 0">
       タスクはありません
@@ -33,24 +27,18 @@
 
 <script>
 import TaskCard from "@/components/TaskCard.vue";
-import log from "loglevel";
+import InputForm from "@/components/InputForm.vue";
 
 export default {
   name: "App",
   components: {
-    TaskCard
+    TaskCard,
+    InputForm
   },
   data: () => ({
     todos: [],
-    title: "Title",
-    text: "Text",
     keyLength: 0
   }),
-  computed: {
-    isDisabled() {
-      return this.text.length === 0;
-    }
-  },
   watch: {
     todos: {
       handler: function(todos) {
@@ -68,24 +56,20 @@ export default {
           todo.id = index + 1;
         });
         this.keyLength = Number(localStorage.keylength);
-        log.debug(this.keyLength);
       } catch (e) {
         localStorage.removeItem("todos");
       }
     }
   },
   methods: {
-    add() {
-      log.debug(this.keyLength);
+    add(title, text) {
       this.keyLength++;
       const newTodo = {
         id: this.keyLength,
-        title: this.title,
-        text: this.text
+        title: title,
+        text: text
       };
       this.todos.push(newTodo);
-      this.title = "";
-      this.text = "";
     },
     remove(id) {
       this.todos = this.todos.filter(todo => todo.id !== id);

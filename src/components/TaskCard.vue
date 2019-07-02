@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import log from "loglevel";
-
 export default {
   name: "TaskCard",
   props: {
@@ -53,7 +51,6 @@ export default {
   },
   methods: {
     remove() {
-      log.debug(`remove: ${this.id}`);
       this.$emit("remove-task", this.id);
     }
   }
