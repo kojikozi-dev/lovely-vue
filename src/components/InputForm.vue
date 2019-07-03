@@ -1,19 +1,20 @@
 <template>
-  <vs-row vs-justify="center">
-    <vs-row vs-justify="center">
-      <vs-input v-model="title" placeholder="title" class="input-margin" />
-      <vs-input v-model="text" placeholder="text" class="input-margin" />
-    </vs-row>
-    <vs-row vs-justify="center">
-      <vs-button
-        type="relief"
-        :disabled="isDisabled"
-        class="input-margin"
-        @click="add"
+  <div class="f-center">
+    <vs-button color="primary" type="filled" @click="active = true"
+      >Create Task Card</vs-button
+    >
+    <vs-popup
+      class-content="popup-example"
+      title="Create Task Card"
+      :active.sync="active"
+    >
+      <vs-input v-model="title" placeholder="title" />
+      <vs-input v-model="text" placeholder="text" />
+      <vs-button type="relief" :disabled="isDisabled" @click="add"
         >Add Task</vs-button
       >
-    </vs-row>
-  </vs-row>
+    </vs-popup>
+  </div>
 </template>
 
 <script>
@@ -21,7 +22,8 @@ export default {
   name: "InputForm",
   data: () => ({
     title: "",
-    text: ""
+    text: "",
+    active: false
   }),
   computed: {
     isDisabled() {
@@ -33,13 +35,27 @@ export default {
       this.$emit("add-task", this.title, this.text);
       this.title = "";
       this.text = "";
+      this.active = false;
     }
   }
 };
 </script>
 
 <style>
-.input-margin {
-  margin: 10px 10px 0px 10px;
+.f-center {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.vs-input {
+  margin: 8px auto;
+}
+
+.vs-button {
+  display: block;
+  margin: 8px auto;
 }
 </style>

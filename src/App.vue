@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <vs-navbar class="nabarx">
-      <h1>
-        <vs-navbar-title>Lovely Vue</vs-navbar-title>
-      </h1>
+      <div slot="title">
+        <vs-navbar-title><h1>Task App</h1></vs-navbar-title>
+      </div>
     </vs-navbar>
     <InputForm @add-task="add" />
     <br />
