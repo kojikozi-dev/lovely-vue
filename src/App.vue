@@ -28,6 +28,7 @@
 <script>
 import TaskCard from "@/components/TaskCard.vue";
 import InputForm from "@/components/InputForm.vue";
+import axios from "axios";
 
 export default {
   name: "App",
@@ -36,42 +37,26 @@ export default {
     InputForm
   },
   data: () => ({
-    todos: [],
-    keyLength: 0
+    todos: []
   }),
-  watch: {
-    todos: {
-      handler: function(todos) {
-        localStorage.setItem("todos", JSON.stringify(todos));
-        localStorage.keylength = todos.length;
-      },
-      deep: true
-    }
-  },
   mounted() {
-    if (localStorage.getItem("todos")) {
-      try {
-        this.todos = JSON.parse(localStorage.getItem("todos"));
-        this.todos.forEach(function(todo, index) {
-          todo.id = index + 1;
-        });
-        this.keyLength = Number(localStorage.keylength);
-      } catch (e) {
-        localStorage.removeItem("todos");
-      }
-    }
+    axios.get(`http://localhost:8890/api/tasks`).then(res => {
+      this.todos = res.data.data;
+    });
   },
   methods: {
     add(title, text) {
-      this.keyLength++;
-      const newTodo = {
-        id: this.keyLength,
-        title: title,
-        text: text
-      };
-      this.todos.push(newTodo);
+      axios
+        .post(`http://localhost:8890/api/tasks`, {
+          title: title,
+          text: text
+        })
+        .then(res => {
+          this.todos.push(res.data.data);
+        });
     },
     remove(id) {
+      axios.delete("http://localhost:8890/api/tasks/" + id);
       this.todos = this.todos.filter(todo => todo.id !== id);
     }
   }

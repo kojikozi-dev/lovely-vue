@@ -20,6 +20,11 @@ yarn add material-icons
 yarn add loglevel
 ```
 
+## axios setup
+```
+yarn add axios
+```
+
 ### Compiles and hot-reloads for development
 ```
 yarn run serve
